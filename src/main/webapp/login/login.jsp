@@ -18,15 +18,6 @@
 		<% String tokenValue = new Date().getTime() +""; %>
 		<c:set value="<%=tokenValue %>" var="token" scope="session"/>
 	</div>
-
-
-<%--	<form action="<%=request.getContextPath()%>/loginChangeServlet" method="post">--%>
-<%--		<div>--%>
-<%--			<font color="RED">${sessionScope.message }	</font>--%>
-<%--			<%session.removeAttribute("message"); %>--%>
-<%--		</div>--%>
-<%--	</form>--%>
-
 	<div class="w">
 		<header>
 			<div class="logo">
@@ -42,23 +33,23 @@
 				</div>
 			</h3>
 			<div class="login_form">
-				<form action="<%=request.getContextPath()%>/loginChangeServlet>" method="post">
+				<form action="loginChangeServlet" method="post">
 					<input type="hidden" name="token" value="<%=tokenValue %>"/>
 					<ul>
 						<li>
 							<label for="userName">用户名:</label>
 							<input id="userName" type="text" name="username" value="${sessionScope.username }">
-							<span class="error">
-								<i class="error_icon"></i>
-								用户名不正确
+							<span id="userNameSpan" class="">
+								<i class=""></i>
+
 							</span>
 						</li>
 						<li>
 							<label for="password">密码:</label>
-							<input id="password" type="text" name="password" size="21">
-							<span class="success">
-								<i class="success_icon"></i>
-								密码正确
+							<input id="password" type="password" name="password" size="21">
+							<span id="userPwdSpan" class="">
+								<i class=""></i>
+
 							</span>
 						</li>
 						<li id="code_li">
@@ -67,7 +58,7 @@
 							<img id="code_img" src="getVerifyCode" alt="验证码图片">
 						</li>
 						<li>
-							<input type="submit" value="登录" class="btn">
+							<input id="submit" type="submit" value="登录" class="btn">
 							<span>
 								<a id="findPwd_link" href="findPassword.jsp">找回密码</a>
 							</span>
@@ -81,7 +72,15 @@
 		</footer>
 	</div>
 	<script>
-		var Relcode = "${sessionScope.code}".toLowerCase();
+		var relCode = "${sessionScope.code}".toLowerCase();
+		var sessionUserName = "${sessionScope.user.name}"
+		var sessionUserPwd = "${sessionScope.user.password}"
+
+		function flush(){
+			relCode = "${sessionScope.code}".toLowerCase();
+			sessionUserName = "${sessionScope.user.name}"
+			sessionUserPwd = "${sessionScope.user.password}"
+		}
 	</script>
 </body>
 </html>

@@ -27,9 +27,20 @@ public class EncodingFilter extends HttpFilter{
 			HttpServletResponse response, FilterChain filterChain)
 			throws IOException, ServletException {
 		request.setCharacterEncoding("utf-8");
-//		response.setContentType("text/html;charset=utf-8");
+		// 不需要过滤的静态资源请求
+		String[] urls = {"/login","/json",".css",".js",".ico",".jpg",".png"};
+		String path = request.getServletPath();
+		boolean b = false;
+		for (String url : urls) {
+			if(path.contains(url)){
+				b = true;
+				break;
+			}
+		}
+		// 不是静态资源要设置编码
+		if(!b){
+			response.setContentType("text/html;charset=utf-8");
+		}
 		filterChain.doFilter(request, response);
-		
 	}
-
 }

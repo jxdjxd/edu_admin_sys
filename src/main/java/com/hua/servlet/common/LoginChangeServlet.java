@@ -1,4 +1,4 @@
-package com.hua.servlet;
+package com.hua.servlet.common;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

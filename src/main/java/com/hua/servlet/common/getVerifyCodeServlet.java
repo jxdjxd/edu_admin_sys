@@ -23,6 +23,7 @@ public class getVerifyCodeServlet extends HttpServlet {
 
         // 将四位数字的验证码保存到Session中
         HttpSession session = req.getSession();
+        System.out.println("java 中生成的验证码：" + codeMap.get("code").toString());
         session.setAttribute("code", codeMap.get("code").toString());
 
         // 禁止图像缓存。

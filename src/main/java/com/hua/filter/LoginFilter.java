@@ -35,7 +35,7 @@ public class LoginFilter extends HttpFilter {
 		//防止重复提交
 		if(!repeatSubmit(request, response)) return;
 		
-		if(username == "" && password == ""){
+		if(username.equals("") && password.equals("")){
 			String message = "账号和密码不能为空";
 			session.setAttribute("message", message);
 			//重定向回到登录页面
@@ -52,7 +52,6 @@ public class LoginFilter extends HttpFilter {
 				return;
 			}
 			filterChain.doFilter(request, response);
-			return;
 		}
 		
 	}
